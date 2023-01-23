@@ -14,9 +14,9 @@ wait(1)
 local Atlas = loadstring(game:HttpGet("https://itots.tk/atlas.lua"))()
 
 local UI = Atlas.new({
-	Name = "🐲 STEEP STEPS  |  Zap Comunnity";
-	FullName = "🐲 STEEP STEPS  |  Zap Comunnity";
-	Credit = "Made with: Zap Comunnity";
+	Name = "🐲 STEEP STEPS  |  Dante#9679";
+	FullName = "🐲 STEEP STEPS  |  Dante#9679";
+	Credit = "Made with: Dante#9679";
 	ConfigFolder = nil;
 	Color = Color3.fromRGB(48, 217, 10);
 	Bind = "RightControl";
@@ -26,6 +26,7 @@ local MyPage = UI:CreatePage("Main")
 local TeleportsSection = MyPage:CreateSection("Main")
 
 local HumanModCons = {}
+local HumanModConss = {}
 
 TeleportsSection:CreateSlider({
 	Name = "WalkSpeed Set ";
@@ -70,11 +71,20 @@ TeleportsSection:CreateSlider({
 			end
 		end
 		JumpPowerChange()
-		HumanModCons.wsLoop = (HumanModCons.wsLoop and HumanModCons.wsLoop:Disconnect() and false) or Human:GetPropertyChangedSignal("WalkSpeed"):Connect(JumpPowerChange)
-		HumanModCons.wsCA = (HumanModCons.wsCA and HumanModCons.wsCA:Disconnect() and false) or game.Players.LocalPlayer.CharacterAdded:Connect(function(nChar)
+		HumanModConss.wsLoop = (HumanModConss.wsLoop and HumanModConss.wsLoop:Disconnect() and false) or Human:GetPropertyChangedSignal("JumpPower"):Connect(JumpPowerChange)
+		HumanModCons.wsCA = (HumanModConss.wsCA and HumanModConss.wsCA:Disconnect() and false) or game.Players.LocalPlayer.CharacterAdded:Connect(function(nChar)
 			Char, Human = nChar, nChar:WaitForChild("Humanoid")
 			JumpPowerChange()
-			HumanModCons.wsLoop = (HumanModCons.wsLoop and HumanModCons.wsLoop:Disconnect() and false) or Human:GetPropertyChangedSignal("WalkSpeed"):Connect(JumpPowerChange)
+			HumanModConss.wsLoop = (HumanModConss.wsLoop and HumanModConss.wsLoop:Disconnect() and false) or Human:GetPropertyChangedSignal("JumpPower"):Connect(JumpPowerChange)
 		end)
 	end;
 })
+
+TeleportsSection:CreateButton({
+	Name = "Destroy UI ";
+	Callback = function()
+		game:GetService("CoreGui").Atlas:Destroy()
+	end
+})
+
+game:GetService("CoreGui").Atlas.Main.Size = UDim2.new(0, 364, 0, 437)
